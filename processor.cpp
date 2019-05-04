@@ -1,5 +1,5 @@
 #include <map>
-//This is a comment
+
 //Recorders
 class recor{
 	char data;
@@ -41,7 +41,54 @@ class processador{
 		void processar(char MIR){
 			//To be implemented
 			//Read the MIR's bits array
+			//FOR taking the last 4 digits of MIR
+			for (int i = 31; i < 36; i++) 
+			{
+				cout<< MIR[i];//I let this in this format, cause I'm trying to find a way to merge the last 4 digits
+			}
 			//Get the data recorder, with bool read true, to bus B
+			//Switch decodifier
+			switch (//The last 4 digits of MIR)
+			{
+			case '0000':
+				//MDR
+				break;
+
+			case '0001':
+				//PC
+				break;
+
+			case '0010':
+				//MBR
+				break;
+
+			case '0011':
+				//MBRU??
+				break;
+
+			case '0100':
+				//SP
+				break;
+
+			case '0101':
+				//LV
+				break;
+
+			case '0110':
+				//CPP
+				break;
+
+			case '0111':
+				//TOS
+				break;
+
+			case '1000':
+				//OPC
+				break;
+
+			default:
+				break;
+			}
 			//Call ULA
 			//Set the data recorder, with bool write true, to bus C
 		}
