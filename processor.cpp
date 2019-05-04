@@ -1,5 +1,5 @@
 #include <map>
-
+//This is a comment
 //Recorders
 class recor{
 	char data;
