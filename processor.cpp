@@ -1,39 +1,35 @@
-#include <map>
-//This is a comment
+#include <string>
+#include "ULA_auxfunctons.hpp"
+
 //Recorders
 class recor{
-	char data;
+	char data[32];
 };
 class recorder : recor{
 	bool read = false;
 	bool write = false;
 };
-class recorderMar : recor{
+class recorderJW : recor{
 	bool write = false;
 };
-class recorderMbr : recor{
+class recorderDR : recor{
 	bool readPart = false;
 	bool readComp = false;
-};
-class recorderH : recor{
-	bool write = false;
 };
 
 class processador{
 	private:
-		//ULA comands map
-		map<char,int> command = {{'011000',011000},{}}
 		//Recorders
-		recorderMar MAR;
+		recorderJW MAR;
 		recorder MDR;
 		recorder PC;
-		recorderMbr MBR;
+		recorderDR MBR;
 		recorder SP;
 		recorder LV;
 		recorder CPP;
 		recorder TOS;
 		recorder OPC;
-		recorderH H;
+		recorderJW H;
 		char busB;
 		char busC;
 
@@ -47,63 +43,62 @@ class processador{
 		}
 
 	private:
-		void ULA(char command){
-			switch(command){
-				case '011000':
+		//ULA function
+		void ULA(string command){
+			if(command == "011000"){
 				//A
 				busC = H.data;
-				break;
-				case '010100':
+			}else if(command == "010100"){
 				//B
 				busC = busB;
-				break;
-				case '011010':
+			}else if(command == "011010"){
 				//~A
-
-				break;
-				case '101100':
+				busC = ~H.data;
+			}else if(command == "101100"){
 				//~B
-
-				break;
-				case '111100':
+				busC = ~busB;
+			}else if(command == "111100"){
 				//A + B
-
-				break;
-				case '111101':
-
-				break;
-				case '':
-
-				break;
-				case '':
-
-				break;
-				case '':
-
-				break;
-				case '':
-
-				break;
-				case '':
-
-				break;
-				case '':
-
-				break;
-				case '':
-
-				break;
-				case '':
-
-				break;
-				case '':
-
-				break;
-				case '':
-
-				break;
-				
+				adder(H.data, busB, busC, false);
+			}else if(command == "111101"){
+				//A + B + 1
+				adder(H.data, busB, busC, true);;
+			}else if(command == "111001"){
+				//A + 1
+				addOne(H.data,busC);
+			}else if(command == "110101"){
+				//B + 1
+				addOne(busB,busC);
+			}else if(command == "111111"){
+				//B - A
+				subtract(busB,H.data, busC, false);
+			}else if(command == "110110"){
+				//B - 1
+				subOne(busB,busC);
+			}else if(command == "111011"){
+				//-A
+				busC = -H.data;
+			}else if(command == "001100"){
+				//A and B
+				if(H.data && busB)
+					busC = 1;
+				else
+					busC = 0;
+			}else if(command == "011100"){
+				//A or B
+				if(H.data || busB)
+					busC = 1;
+				else
+					busC = 0;
+			}else if(command == "010000"){
+				//0
+				busC = 0;
+			}else if(command == "110001"){
+				//1
+				busC = 1;
+			}else if(command == "110010"){
+				//-1
+				busC = -1;
 			}
-
 		}
 }
