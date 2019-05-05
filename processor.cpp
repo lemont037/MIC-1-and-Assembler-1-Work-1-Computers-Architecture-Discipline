@@ -61,7 +61,53 @@ class processador{
 			char ULACommand[] = {MIR[12],MIR[13],MIR[14],MIR[15],MIR[16],MIR[17],MIR[18],MIR[19]};
 			ULA(ULACommand);
 			//Set the data recorder, with bool write true, to bus C
-			
+			char commandC = {MIR[20],MIR[21],MIR[22],MIR[23],MIR[24],MIR[25],MIR[26],MIR[27],MIR[28],MIR[29]}
+			MAR.write = false;
+			MDR.write = false;
+			PC.write = false;
+			SP.write = false;
+			LV.write = false;
+			CPP.write = false;
+			TOS.write = false;
+			OPC.write = false;
+			H.write = false;
+			if(commandC == "000000001")
+				MAR.write = true;
+			else if(commandC == "000000010")
+				MDR.write = true;
+			else if(commandC == "000000100")
+				PC.write = true;
+			else if(commandC == "000001000")
+				SP.write = true;
+			else if(commandC == "000010000")
+				LV.write = true;
+			else if(commandC == "000100000")
+				CPP.write = true;
+			else if(commandC == "001000000")
+				TOS.write = true;
+			else if(commandC == "010000000")
+				OPC.write = true;
+			else if(commandC == "100000000")
+				H.write = true;
+
+			if(MAR.write)
+				busC = MAR.data;
+			else if(MDR.write)
+				busC = MDR.data;
+			else if(PC.write)
+				busC = PC.data; 
+			else if(SP.write)
+				busC = SP.data;
+			else if(LV.write)
+				busC = LV.data;
+			else if(CPP.write)
+				busC = CPP.data;
+			else if(TOS.write)
+				busC = TOS.data;
+			else if(OPC.write)
+				busC = OPC.data;
+			else if(H.write)
+				busC = H.data;
 		}
 
 	private:
