@@ -1,3 +1,5 @@
 #include "processorFinal.cpp"
 
-class processador;
+class processador{
+	void processar(char MIR);
+};
