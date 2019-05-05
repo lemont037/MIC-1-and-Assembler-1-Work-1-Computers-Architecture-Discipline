@@ -8,8 +8,10 @@ void addOne(char* A, char* result){
 		result[i] = A[i];
 	
 	int i = 31;
-	while(A[i] != '0' && i > -1)
+	while(A[i] != '0' && i > -1){
+		result[i] = '0';
 		i--;
+	}
 	result[i] = '1';
 }
 //Full adder
