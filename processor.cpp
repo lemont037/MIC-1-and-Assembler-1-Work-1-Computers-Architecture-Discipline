@@ -6,15 +6,15 @@ class recor{
 	char data[32];
 };
 class recorder : recor{
-	bool read = false;
-	bool write = false;
+	bool read;
+	bool write;
 };
 class recorderJW : recor{
-	bool write = false;
+	bool write;
 };
 class recorderDR : recor{
-	bool readPart = false;
-	bool readComp = false;
+	bool readPart;
+	bool readComp;
 };
 
 class processador{
@@ -37,12 +37,64 @@ class processador{
 		void processar(char MIR){
 			//To be implemented
 			//Read the MIR's bits array
+			//Call Decoder to the set as true the recorder that will be read
+			char decoderCommand[] = {MIR[32],MIR[33],MIR[34],MIR[35]};
+			decoder(decoderCommand);
 			//Get the data recorder, with bool read true, to bus B
+			if(MDR.read)
+				busB = MDR.data;
+			else if(PC.read)
+				busB = PC.data;
+			else if(MBR.read)
+				busB = MBR.data;
+			else if(SP.read)
+				busB = SP.data;
+			else if(LV.read)
+				busB = LV.data;
+			else if(CPP.read)
+				busB = CPP.data;
+			else if(TOS.read)
+				busB = TOS.data;
+			else if(OPC.read)
+				busB = OPC.data;
 			//Call ULA
+			char ULACommand[] = {MIR[12],MIR[13],MIR[14],MIR[15],MIR[16],MIR[17],MIR[18],MIR[19]};
+			ULA(ULACommand);
 			//Set the data recorder, with bool write true, to bus C
+			
 		}
 
 	private:
+		//Decoder
+		void decoder(string command){
+			MDR.read = false;
+			PC.read = false;
+			MBR.read = false;
+			SP.read = false;
+			LV.read = false;
+			CPP.read = false;
+			TOS.read = false;
+			OPC.read = false;
+			H.read = false;
+			if(command == "0000")
+				MDR.read = true;
+			else if(command == "0001")
+				PC.read = true;
+			else if(command == "0010")
+				MBR.readPart = true;
+			else if(command == "0011")
+				MBR.readComp = true;
+			else if(command == "0100")
+				SP.read = true;
+			else if(command == "0101")
+				LV.read = true;
+			else if(command == "0110")
+				CPP.read = true;
+			else if(command == "0111")
+				TOS.read = true;
+			else if(command == "1000")
+				OPC.read = true;
+		}
 		//ULA function
 		void ULA(string command){
 			if(command == "011000"){
