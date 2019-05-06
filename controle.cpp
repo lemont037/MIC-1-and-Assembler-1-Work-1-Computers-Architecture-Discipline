@@ -5,6 +5,11 @@ void controle(char* opcode)
 {   microcode rom [512];
     vector <byte> prog; //tem que ser vector pq não sabemos o tamanho do programa
     lerArquivos (prog, *rom);
+    for (int i=4; prog.size();i++) //começa do byte 5 pq os 4 primeiros é só o tamanho do programa
+    {
+        processador(rom [prog[i]]); //na minha cabeça, executa o microprograma pega o endereço da instrução no programa e executa usando o processador
+        
+    }
 
 
 
