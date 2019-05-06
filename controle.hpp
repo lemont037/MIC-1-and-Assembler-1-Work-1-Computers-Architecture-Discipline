@@ -14,9 +14,13 @@ typedef unsigned int word;
 typedef unsigned char byte;
 typedef unsigned long long microcode;
 
+typedef struct mnemonico;
+
 
 
 void controle(char* opcode);
 void lerArquivos (vector<byte> &prog, microcode &rom);
+vector <mnemonico> criaMne ();
+int procuraMnemonico(byte endereco, vector<mnemonico> mnemonicos);
 
 #endif // CONTROLE_HPP_INCLUDED
