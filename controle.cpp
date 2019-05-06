@@ -7,10 +7,11 @@ void controle(char* opcode)
     lerArquivos (prog, *rom);
     for (int i=4; prog.size();i++) //começa do byte 5 pq os 4 primeiros é só o tamanho do programa
     {
-        processador(rom [prog[i]]); //na minha cabeça, executa o microprograma pega o endereço da instrução no programa e executa usando o processador
+        processador(rom [prog[i]]); //na minha cabeça, o microprograma 
+                                    //pega o endereço da instrução no programa e executa usando o processador
+                                    //não precisa se preocupar com os bytes de endereços de variáveis etc, pq o proprio microprograma já cuida disso
         
     }
-
 
 
 }
