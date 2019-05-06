@@ -18,6 +18,5 @@ typedef unsigned long long microcode;
 
 void controle(char* opcode);
 void lerArquivos (vector<byte> &prog, microcode &rom);
-void lerByte (atual)
 
 #endif // CONTROLE_HPP_INCLUDED
