@@ -5,7 +5,6 @@ void controle(char* opcode)
 {   microcode rom [512];
     vector <byte> prog; //tem que ser vector pq não sabemos o tamanho do programa
     lerArquivos (prog, *rom);
-    vector <mnemonico> mnemonicos = criaMne();
 
 
 
